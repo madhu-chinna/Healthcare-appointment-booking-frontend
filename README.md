@@ -235,7 +235,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👨‍💻 Author
 
 **Your Name**
-- GitHub: [@yourusername](https://github.com/yourusername)
+- GitHub: [@yourusername](https://github.com/madhu-chinna)
 - LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
 
 ## 🙏 Acknowledgments
@@ -244,6 +244,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - React Bootstrap for UI components
 - Moment.js for timezone handling
 - Render for backend hosting
-- All contributors and testers
 
 ---
