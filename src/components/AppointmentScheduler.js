@@ -31,13 +31,19 @@ const AppointmentScheduler = () => {
   useEffect(() => {
     if (selectedDate) {
       const getSlots = async () => {
-        const response = await fetchAvailableSlots(doctorId, selectedDate);
-        if (response && response.availableSlots) {
-          setAvailableSlots(response.availableSlots);
-          setSlotMessage(response.message || '');
-        } else {
-          setAvailableSlots(response || []);
-          setSlotMessage('');
+        try {
+          const response = await fetchAvailableSlots(doctorId, selectedDate);
+          if (response && response.availableSlots) {
+            setAvailableSlots(response.availableSlots);
+            setSlotMessage(response.message || '');
+          } else {
+            setAvailableSlots(response || []);
+            setSlotMessage('');
+          }
+        } catch (error) {
+          console.error('Error fetching slots:', error);
+          setAvailableSlots([]);
+          setSlotMessage('Failed to load available slots. Please try again.');
         }
       };
       getSlots();
@@ -55,8 +61,18 @@ const AppointmentScheduler = () => {
     setShowBookingForm(false);
     setSelectedSlot(null);
     // Refresh slots after booking
-    fetchAvailableSlots(doctorId, selectedDate).then(slots => {
-      setAvailableSlots(slots);
+    fetchAvailableSlots(doctorId, selectedDate).then(response => {
+      if (response && response.availableSlots) {
+        setAvailableSlots(response.availableSlots);
+        setSlotMessage(response.message || '');
+      } else {
+        setAvailableSlots(response || []);
+        setSlotMessage('');
+      }
+    }).catch(error => {
+      console.error('Error refreshing slots after booking:', error);
+      setAvailableSlots([]);
+      setSlotMessage('Failed to refresh available slots. Please try again.');
     });
   };
 
